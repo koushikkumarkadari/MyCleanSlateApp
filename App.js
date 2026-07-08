@@ -1,20 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { HabitProvider } from './src/context/HabitContext';
+
+import DashboardScreen from './src/screens/DashboardScreen';
+import VaultLockScreen from './src/screens/VaultLockScreen';
+import VaultScreen from './src/screens/VaultScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <HabitProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+          <Stack.Screen name="VaultLockScreen" component={VaultLockScreen} />
+          <Stack.Screen name="VaultScreen" component={VaultScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </HabitProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
